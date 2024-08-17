@@ -1,0 +1,25 @@
+<div class="container text-center" *ngIf="books.length > 0">
+    <div *ngFor="let book of books" class="books-container">
+        <div class="book-tile">
+            <div class="book-img">
+                <img [src]="book.thumbnail || '../../../../../assets/images/book-cover.gif'" alt="Thumbnail not available">
+            </div>
+            <div class="book-info">
+                <h4>{{book.title}} <span class="author-name">by {{book.author}}</span></h4>
+                <h6>published by {{book.publisher}}</h6>
+                <p>{{book.subtitle}}</p>
+                <div class="buttons">
+                    <button type="button" class="btn btn-link" [routerLink]="['/book-detail', book.bookId]">View Details</button>
+                    <button class="btn btn-outline-danger" (click)="deleteFromBookShelf(book.id)"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3" *ngIf="books.length > 0">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [maxSize]="10"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)">
+        </pagination>
+    </div>
+</div>
+<div class="container text-center" *ngIf="!books || books.length === 0">Bookshelf is empty</div>

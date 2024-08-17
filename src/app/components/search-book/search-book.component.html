@@ -1,0 +1,33 @@
+<div class="container text-center">
+    <h2 class="text-primary-emphasis">BookScout</h2>
+    <h6 class="text-secondary-emphasis">Discover Your Next Great Read</h6>
+    <hr>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <form class="input-group mb-3" [formGroup]="searchBookForm" (ngSubmit)="onSearch()">
+            <input type="text" class="form-control" formControlName="query" placeholder="Seach Books" aria-describedby="search-btn">
+            <button class="btn btn-success search-button" type="submit" id="search-btn"><i class="fa fa-search text-light"></i></button>
+        </form>
+    </div>
+
+    <div *ngFor="let item of paginatedData" class="books-container">
+        <div class="book-tile">
+            <div class="book-img">
+                <img [src]="item?.volumeInfo?.imageLinks?.thumbnail || item?.volumeInfo?.imageLinks?.smallThumbnail || '../../../../../assets/images/book-cover.gif'" alt="Thumbnail not available">
+            </div>
+            <div class="book-info">
+                <h4>{{item?.volumeInfo?.title}} <span class="author-name">by {{item?.volumeInfo?.authors?.[0]}}</span></h4>
+                <h6>{{item?.volumeInfo?.subtitle}}</h6>
+                <p>{{item?.searchInfo?.textSnippet}}</p>
+                <a [routerLink]="['/book-detail', item.id]">know more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3" *ngIf="books.length > 0">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [maxSize]="10"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)">
+        </pagination>
+    </div>
+    
+</div>

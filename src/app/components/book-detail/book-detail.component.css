@@ -1,0 +1,27 @@
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action button {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.action div {
+    font-size: 14px;
+}
+
+.read-more {
+    cursor: pointer;
+}

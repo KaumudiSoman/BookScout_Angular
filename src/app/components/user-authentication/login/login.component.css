@@ -1,0 +1,11 @@
+.form-width {
+    width: 28%;
+    margin-left: 150px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+}
+
+.google-btn {
+    cursor: pointer;
+}

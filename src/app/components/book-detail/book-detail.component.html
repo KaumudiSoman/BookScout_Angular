@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img [src]="book?.volumeInfo?.imageLinks?.thumbnail || book?.volumeInfo?.imageLinks?.smallThumbnail || 
+                  '../../../../../assets/images/book-cover.gif'" alt="Thumbnail not available"  height="250">
+              </div>
+              <div class="actions mb-3 mt-4">
+                <div class="action">
+                  <button class="btn btn-outline-secondary mb-2" (click)="addToBookshelf()"><i class="fa fa-check"></i></button>
+                  <div>Already Read</div>
+                </div>
+                <div class="action">
+                  <button class="btn btn-outline-secondary mb-2" (click)="addToWishlist()"><i class="fa fa-bookmark"></i></button>
+                  <div>Wishlist</div>
+                </div>
+              </div>
+              <hr>
+              <div class="row ms-3">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Title</h6>
+                </div>
+                <div class="col-sm-9">
+                  {{book?.volumeInfo?.title}}
+                </div>
+              </div>
+              <hr>
+              <div class="row ms-3">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Author</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.authors?.[0]}}
+                </div>
+              </div>
+              <hr>
+              <div class="row ms-3">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Publisher</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.publisher}}, {{book?.volumeInfo?.publishedDate}}
+                </div>
+              </div>
+              <hr>
+              <div class="row ms-3">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Length</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.pageCount || book?.volumeInfo?.printedPageCount}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">About</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.subtitle}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Overview</h6>
+                </div>
+                <div class="col-sm-9">
+                    <span *ngIf="showFullContent; else truncatedContent">
+                      {{ book?.volumeInfo?.description }}<a class="read-more" (click)="toggleContent()">{{readMode}}</a>
+                    </span>
+                    <ng-template #truncatedContent>
+                      {{ book?.volumeInfo?.description | slice:0:maxLength }}<span *ngIf="book?.volumeInfo?.description.length > maxLength">...</span>
+                    </ng-template>
+                    <a *ngIf="book?.volumeInfo?.description.length > maxLength && !showFullContent" class="read-more" (click)="toggleContent()">{{readMode}}</a>
+                </div>
+              </div>
+              <hr *ngIf="book?.volumeInfo?.averageRating">
+              <div class="row" *ngIf="book?.volumeInfo?.averageRating">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Rating</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.averageRating}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Language</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.language}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Maturity Rating</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.maturityRating}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3 text-secondary">
+                  <h6 class="mb-0">Genre</h6>
+                </div>
+                <div class="col-sm-9">
+                    {{book?.volumeInfo?.categories}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

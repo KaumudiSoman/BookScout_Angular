@@ -1,0 +1,30 @@
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.grid-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    width: 1fr;
+    margin-bottom: 40px;
+}
+
+.grid-item {
+    /* width: 200px;
+    height: inherit; */
+    display: inline-block; /* Optional: Rounds the corners of the image */
+    /* overflow: hidden;  */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.352); 
+}
+
+.grid-item img {
+    display: block; /* Removes any gaps below the image */
+    width: 100%; /* Ensures the image fits the container */
+    height: auto;
+}

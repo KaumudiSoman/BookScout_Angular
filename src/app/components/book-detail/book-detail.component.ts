@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/app/_models/BookDataModels';
 import { AuthService } from 'src/app/_services/auth.service';
 import { BookshelfService } from 'src/app/_services/bookshelf.service';
@@ -23,7 +24,7 @@ export class BookDetailComponent implements OnInit {
   maxLength: number = 400;
 
   constructor(private route: ActivatedRoute, private utilService: UtilService, private wishlistService: WishlistService, 
-    private bookshelfService: BookshelfService, private authService: AuthService) {}
+    private bookshelfService: BookshelfService, private authService: AuthService, private toastrService: ToastrService) {}
 
   ngOnInit(): void {
       this.route.paramMap.subscribe(params => {
@@ -60,7 +61,7 @@ export class BookDetailComponent implements OnInit {
     console.log(this.selectedBook);
     this.wishlistService.addToWishlist(this.selectedBook, this.userId).subscribe({
       next: response => {
-        alert('Successfully added to wishlist')
+        this.toastrService.success('Successfully added to wishlist')
         console.log(response)
       }
     })
@@ -76,7 +77,7 @@ export class BookDetailComponent implements OnInit {
     console.log(this.selectedBook);
     this.bookshelfService.addToBookshelf(this.selectedBook, this.userId).subscribe({
       next: response => {
-        alert('Successfully added to bookshelf')
+        this.toastrService.success('Successfully added to bookshelf')
         console.log(response)
       }
     })

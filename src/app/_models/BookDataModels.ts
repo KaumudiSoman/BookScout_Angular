@@ -16,5 +16,5 @@ export interface Book {
 
 export interface User {
     email: string,
-    userName: string
+    userName: string,
 }

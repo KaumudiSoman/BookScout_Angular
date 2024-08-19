@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
-import { UtilService } from 'src/app/_services/util.service';
 
 @Component({
   selector: 'app-register',
@@ -11,19 +11,8 @@ import { UtilService } from 'src/app/_services/util.service';
 })
 export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({});
-  radioOptions = [
-    {label: "Male", value: "Male"},
-    {label: "Female", value: "Female"},
-    {label: "Other", value: "Other"},
-  ]
 
-  selectOptions = [
-    { value: '', label: 'Select marital status', isDisabled: true },
-    { value: 'unmarried', label: 'Unmarried', isDisabled: false },
-    { value: 'married', label: 'Married', isDisabled: false }
-  ];
-
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -31,15 +20,9 @@ export class RegisterComponent {
 
   initializeForm() {
     this.registerForm = this.fb.group({
-      // userName: ['', Validators.required],
+      userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      // firstName: ['', Validators.required],
-      // lastName: ['', Validators.required],
-      // maritalStatus: ['', Validators.required],
-      // contact: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
-      // checkBox: [false, this.checkBoxValidation()],
-      // gender: ['', Validators.required]
     })
   }
 
@@ -61,9 +44,9 @@ export class RegisterComponent {
     const formValue = this.registerForm.value;
     
     // this.authService.register(String(formValue.email), String(formValue.password));
-    this.authService.register(String(formValue.email), String(formValue.password)).subscribe({
-      next: () => {this.router.navigateByUrl('login')},
-      error: err => {alert(err.message)}
+    this.authService.register(String(formValue.email), String(formValue.password), String(formValue.userName)).subscribe({
+      next: () => {this.router.navigateByUrl('')},
+      error: err => {this.toastrService.error(err.message)}
     })
   }
 

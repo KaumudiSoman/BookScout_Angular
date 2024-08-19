@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm : FormGroup = new FormGroup({}); 
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -27,7 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
     const email = String(this.forgotPasswordForm.value.email);
     this.authService.forgotPassword(email).subscribe({
       next: () => {this.router.navigateByUrl('verify-email')},
-      error: err => {alert(err.message)}
+      error: err => {this.toastrService.error(err.message)}
     })
   }
 }

@@ -1,3 +1,17 @@
 .dropdown-toggle, .dropdown-item, .nav-link {
     cursor: pointer;
 }
+
+.navbar-nav li:hover>ul.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    margin-top: -5px;
+    left: 100%;
+}

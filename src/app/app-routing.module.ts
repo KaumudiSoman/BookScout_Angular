@@ -9,18 +9,25 @@ import { ForgotPasswordComponent } from './components/user-authentication/forgot
 import { VerifyEmailComponent } from './components/user-authentication/verify-email/verify-email.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { BookshelfComponent } from './components/bookshelf/bookshelf.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  // {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'verify-email', component: VerifyEmailComponent},
-  {path: 'explore', component: SearchBookComponent},
-  {path: 'wishlist', component: WishlistComponent},
-  {path: 'bookshelf', component: BookshelfComponent},
-  {path: 'book-detail/:id', component: BookDetailComponent}
+  {path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {path: 'forgot-password', component: ForgotPasswordComponent},
+      {path: 'verify-email', component: VerifyEmailComponent},
+      {path: 'explore', component: SearchBookComponent},
+      {path: 'wishlist', component: WishlistComponent},
+      {path: 'bookshelf', component: BookshelfComponent},
+      {path: 'book-detail/:id', component: BookDetailComponent}
+    ]
+  }
 ];
 
 @NgModule({

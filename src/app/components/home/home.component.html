@@ -1,4 +1,5 @@
-<div class="container text-center">
+<app-login *ngIf="!authService.currentUserSig()"></app-login>
+<div class="container text-center" *ngIf="authService.currentUserSig()">
     <h2 class="text-primary-emphasis">BookScout</h2>
     <h6 class="text-secondary-emphasis">Discover Your Next Great Read</h6>
     <hr>

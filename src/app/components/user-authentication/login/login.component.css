@@ -9,3 +9,8 @@
 .google-btn {
     cursor: pointer;
 }
+
+.img-div {
+    height: 500px;
+    margin-left: 20px;
+}

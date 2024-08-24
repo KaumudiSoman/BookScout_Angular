@@ -4,7 +4,6 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, Auth, UserC
   user, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, signOut, updateProfile} from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { User } from '../_models/BookDataModels';
-import {  } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
